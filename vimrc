@@ -27,6 +27,9 @@ inoremap <c-u> <esc>vawUei
 nnoremap <c-u> vawUe<esc>
 " .vimrcファイルを縦にWindowを分割して表示する
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+" alternate bufferを現在ウインドウの右側に縦分割で開くalternate buffer
+" vertical
+nnoremap <leader>abv :execute "rightbelow vsplit " .. bufname('#')<CR>
 " .vimrcファイルを現在のプロセスで読み込む
 nnoremap <leader>sv :source $MYVIMRC<CR>
 " 分割されたウィンドウを上に移動する
@@ -43,6 +46,20 @@ vnoremap "" <esc>`<i"<esc>`>a"<esc>
 nnoremap H ^
 " 現在行の末尾に移動する
 nnoremap L $
+
+" 1コマンドで2行消すが、undolevelsを設定することで、undo blockを新たに作り、undoするのは1行ずつにする
+nnoremap <leader>d dd:let &g:undolevels = &g:undolevels<cr>dd
+
+" 2個以上連続するスペースをハイライトする。
+nnoremap <leader>w :match DiffDelete /\v\s{2,}/<cr>
+" 2個以上連続するスペースをハイライトする。という設定を無効にする。
+nnoremap <leader>W :match none<cr>
+" /と?で検索するときに自動的に\vを挿入してvery magic検索をする。
+nnoremap / /\v
+nnoremap ? ?\v
+" 最後に検索したitemのハイライトを止める。
+nnoremap nhl :nohlsearch<cr>
+
 
 " ウィンドウ間の移動を無効にする
 nnoremap <c-w>k <nop>
